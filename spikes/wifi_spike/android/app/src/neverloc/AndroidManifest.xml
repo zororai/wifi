@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- "neverloc" flavour: asserts neverForLocation on NEARBY_WIFI_DEVICES (Android 13+)
+         so Phase 0 can observe what changes when the app claims it never derives location. -->
+    <uses-permission
+        android:name="android.permission.NEARBY_WIFI_DEVICES"
+        android:usesPermissionFlags="neverForLocation"
+        tools:node="replace" />
+    <application android:label="Wi-Fi spike (neverloc)" tools:replace="android:label" />
+</manifest>
