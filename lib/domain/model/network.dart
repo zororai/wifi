@@ -20,7 +20,9 @@ String? normalizeBssid(String? raw) {
 final class TargetNetwork {
   /// Throws [ArgumentError] if [bssid] is not a usable BSSID.
   TargetNetwork({required this.ssid, required String bssid})
-    : bssid = normalizeBssid(bssid) ?? (throw ArgumentError.value(bssid, 'bssid', 'Not a usable BSSID'));
+    : bssid =
+          normalizeBssid(bssid) ??
+          (throw ArgumentError.value(bssid, 'bssid', 'Not a usable BSSID'));
 
   /// Human-readable network name. May be empty for hidden networks.
   final String ssid;

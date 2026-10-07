@@ -71,7 +71,11 @@ PointAggregation aggregateSamples(
   required int minValidSamples,
 }) {
   if (minValidSamples < 1) {
-    throw ArgumentError.value(minValidSamples, 'minValidSamples', 'must be >= 1');
+    throw ArgumentError.value(
+      minValidSamples,
+      'minValidSamples',
+      'must be >= 1',
+    );
   }
   final accepted = <RssiSample>[];
   final rejected = <RejectedSample>[];
