@@ -6,7 +6,9 @@ plugins {
 
 android {
     namespace = "dev.rssimapper.ar_spike"
-    compileSdk = flutter.compileSdkVersion
+    // permission_handler_android 14.1.0 requires compileSdk >= 37 (compile-time only;
+    // targetSdk is unchanged). AGP 9.1.0 warns above 36: suppressed in gradle.properties.
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -19,7 +21,8 @@ android {
         applicationId = "dev.rssimapper.ar_spike"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        // Project requirement: minSdk 26 (ARCore itself needs 24).
+        minSdk = 26
         targetSdk = flutter.targetSdkVersion
         // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
         // is added automatically by Flutter. (https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions)
@@ -46,4 +49,9 @@ kotlin {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Latest ARCore on Google Maven at time of Phase 0 (checked 2026-10-07).
+    implementation("com.google.ar:core:1.56.0")
 }
