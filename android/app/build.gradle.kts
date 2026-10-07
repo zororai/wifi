@@ -6,7 +6,9 @@ plugins {
 
 android {
     namespace = "dev.rssimapper.rssi_mapper"
-    compileSdk = flutter.compileSdkVersion
+    // permission_handler_android 14.x requires compileSdk >= 37 (compile-time only;
+    // targetSdk is unchanged). AGP 9.1.0 warns above 36: suppressed in gradle.properties.
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

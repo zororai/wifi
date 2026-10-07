@@ -1,4 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Wi-Fi: read state, request scans, observe the connected network. -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Required by Android to read scan results and the connected BSSID.
+         The app never uses GPS or stores the device's geographic location. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- Android 13+. Deliberately WITHOUT usesPermissionFlags="neverForLocation":
+         this app associates Wi-Fi observations with physical positions in a room,
+         so asserting it never derives location would be inaccurate. -->
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" />
     <application
         android:label="RSSI Mapper"
         android:name="${applicationName}"

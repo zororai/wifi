@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../core/routing/app_router.dart';
 
 import '../../core/result.dart';
 import '../../data/database/app_database.dart';
@@ -66,18 +69,20 @@ class _ActionsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Destinations are enabled by the phases that implement them.
-    return const Card(
+    return Card(
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
           _ActionTile(
             icon: Icons.add_location_alt_outlined,
             title: 'New survey',
+            subtitle: 'Choose the Wi-Fi access point to measure',
+            onTap: () => context.push(AppRoutes.scanner),
           ),
-          Divider(height: 1),
-          _ActionTile(icon: Icons.history, title: 'Previous surveys'),
-          Divider(height: 1),
-          _ActionTile(icon: Icons.tune, title: 'Settings'),
+          const Divider(height: 1),
+          const _ActionTile(icon: Icons.history, title: 'Previous surveys'),
+          const Divider(height: 1),
+          const _ActionTile(icon: Icons.tune, title: 'Settings'),
         ],
       ),
     );
@@ -85,18 +90,29 @@ class _ActionsCard extends StatelessWidget {
 }
 
 class _ActionTile extends StatelessWidget {
-  const _ActionTile({required this.icon, required this.title});
+  const _ActionTile({
+    required this.icon,
+    required this.title,
+    this.subtitle,
+    this.onTap,
+  });
 
   final IconData icon;
   final String title;
+  final String? subtitle;
+
+  /// Null while the destination is not implemented yet.
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      enabled: false,
+      enabled: onTap != null,
       leading: Icon(icon),
       title: Text(title),
-      subtitle: const Text('Not available in this build yet'),
+      subtitle: Text(subtitle ?? 'Not available in this build yet'),
+      trailing: onTap == null ? null : const Icon(Icons.chevron_right),
+      onTap: onTap,
     );
   }
 }
