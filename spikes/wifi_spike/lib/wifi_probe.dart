@@ -6,13 +6,13 @@ class WifiProbe {
   static const _scanEvents = EventChannel('spike/wifi/scanEvents');
   static const _connected = EventChannel('spike/wifi/connected');
 
-  Future<Map<String, Object?>> deviceInfo() async =>
-      Map<String, Object?>.from(
-          (await _method.invokeMethod<Map>('deviceInfo')) ?? const {});
+  Future<Map<String, Object?>> deviceInfo() async => Map<String, Object?>.from(
+    (await _method.invokeMethod<Map>('deviceInfo')) ?? const {},
+  );
 
-  Future<Map<String, Object?>> startScan() async =>
-      Map<String, Object?>.from(
-          (await _method.invokeMethod<Map>('startScan')) ?? const {});
+  Future<Map<String, Object?>> startScan() async => Map<String, Object?>.from(
+    (await _method.invokeMethod<Map>('startScan')) ?? const {},
+  );
 
   Future<List<Map<String, Object?>>> scanResults() async {
     final list = await _method.invokeListMethod<Map>('scanResults') ?? const [];
@@ -21,8 +21,8 @@ class WifiProbe {
 
   Future<Map<String, Object?>> legacyConnectionInfo() async =>
       Map<String, Object?>.from(
-          (await _method.invokeMethod<Map>('legacyConnectionInfo')) ??
-              const {});
+        (await _method.invokeMethod<Map>('legacyConnectionInfo')) ?? const {},
+      );
 
   Future<void> openLocationSettings() =>
       _method.invokeMethod<void>('openLocationSettings');
@@ -30,9 +30,8 @@ class WifiProbe {
   Future<void> openWifiSettings() =>
       _method.invokeMethod<void>('openWifiSettings');
 
-  Future<String?> saveText(String name, String content) =>
-      _method.invokeMethod<String>(
-          'saveText', {'name': name, 'content': content});
+  Future<String?> saveText(String name, String content) => _method
+      .invokeMethod<String>('saveText', {'name': name, 'content': content});
 
   /// Every SCAN_RESULTS_AVAILABLE broadcast, including updated == false.
   Stream<Map<String, Object?>> scanEvents() => _scanEvents

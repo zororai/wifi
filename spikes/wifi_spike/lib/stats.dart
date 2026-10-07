@@ -20,9 +20,16 @@ class Summary {
     final variance = v.length < 2
         ? 0.0
         : v.map((x) => (x - mean) * (x - mean)).reduce((a, b) => a + b) /
-            (v.length - 1);
-    return Summary._(v.length, mean, math.sqrt(variance), v.first,
-        _percentile(v, 0.5), _percentile(v, 0.95), v.last);
+              (v.length - 1);
+    return Summary._(
+      v.length,
+      mean,
+      math.sqrt(variance),
+      v.first,
+      _percentile(v, 0.5),
+      _percentile(v, 0.95),
+      v.last,
+    );
   }
 
   static double _percentile(List<double> sorted, double q) {
@@ -34,14 +41,14 @@ class Summary {
   }
 
   Map<String, Object> toJson() => {
-        'n': n,
-        'mean': mean,
-        'sd': sd,
-        'min': min,
-        'p50': p50,
-        'p95': p95,
-        'max': max,
-      };
+    'n': n,
+    'mean': mean,
+    'sd': sd,
+    'min': min,
+    'p50': p50,
+    'p95': p95,
+    'max': max,
+  };
 
   @override
   String toString() =>
@@ -52,6 +59,5 @@ class Summary {
 
 /// Intervals between consecutive timestamps (same unit as input).
 List<num> intervals(List<num> timestamps) => [
-      for (var i = 1; i < timestamps.length; i++)
-        timestamps[i] - timestamps[i - 1],
-    ];
+  for (var i = 1; i < timestamps.length; i++) timestamps[i] - timestamps[i - 1],
+];
